@@ -1,15 +1,18 @@
 import { Container, GroupImage, GroupInformation } from './styles';
 
-export default function SidebarGroup() {
+export default function SidebarGroup({ group, selected }) {
+
+  const lastMessage = group.messages.length - 1;
+
   return (
-    <Container>
+    <Container selected={selected}>
       <GroupImage>
-        <img src="https://images.wallpaperscraft.com/image/single/clock_alarm_clock_time_222141_1280x720.jpg" alt="Group Image" />
+        <img src={group.image} alt={group.name} />
       </GroupImage>
 
       <GroupInformation>
-        <h5>What is Lorem Ipsum?</h5>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+        <h5>{group.name}</h5>
+        <p>{group.messages[lastMessage].sender.name}: {group.messages[lastMessage].message}</p>
       </GroupInformation>
     </Container>
   );

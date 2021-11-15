@@ -1,0 +1,131 @@
+{
+  "groups": [
+    {
+      "id": "0",
+      "image": "https://reactjs.org/logo-og.png",
+      "name": "React",
+      "description": "Group dedicated to discussions about React Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a pi",
+      "created_at": "2021-11-13",
+      "members": [
+        {
+          "email": "luizoliveira2808@gmail.com",
+          "name": "Luiz",
+          "image": "https://images.wallpaperscraft.com/image/single/field_hills_landscape_225569_1280x720.jpg"
+        },
+        {
+          "email": "oliveira@gmail.com",
+          "name": "Oliveira",
+          "image": "https://images.wallpaperscraft.com/image/single/park_path_trees_225560_1280x720.jpg"
+        },
+        {
+          "email": "antonio@gmail.com",
+          "name": "Antonio",
+          "image": "https://images.wallpaperscraft.com/image/single/city_buildings_lake_225551_1280x720.jpg"
+        }
+      ],
+      "messages": [
+        {
+          "id": 0,
+          "message": "E aí, pessoal. Beleza?",
+          "sender": {
+            "email": "luizoliveira2808@gmail.com",
+            "name": "Luiz"
+          }
+        },
+        {
+          "id": 1,
+          "message": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum",
+          "sender": {
+            "email": "antonio@gmail.com",
+            "name": "Antonio"
+          }
+        },
+        {
+          "id": 2,
+          "message": "Contrary to popular belief, Lorem Ipsum.",
+          "sender": {
+            "email": "oliveira@gmail.com",
+            "name": "Oliveira"
+          }
+        },
+        {
+          "id": 3,
+          "message": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
+          "sender": {
+            "email": "luizoliveira2808@gmail.com",
+            "name": "Luiz"
+          }
+        },
+        {
+          "id": 4,
+          "message": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
+          "sender": {
+            "email": "luizoliveira2808@gmail.com",
+            "name": "Luiz"
+          }
+        },
+        {
+          "id": 5,
+          "message": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
+          "sender": {
+            "email": "oliveira@gmail.com",
+            "name": "Oliveira"
+          }
+        }
+      ]
+    },
+    {
+      "id": "1",
+      "image": "https://iconape.com/wp-content/files/gm/82643/svg/next-js.svg",
+      "name": "Next.js",
+      "description": "Group dedicated to discussions about React",
+      "created_at": "2021-11-13",
+      "members": [
+        {
+          "email": "luizoliveira2808@gmail.com",
+          "name": "Luiz",
+          "image": "https://images.wallpaperscraft.com/image/single/field_hills_landscape_225569_1280x720.jpg"
+        }
+      ],
+      "messages": [
+        {
+          "id": 0,
+          "message": "Como eu adiciono uma fonte no projeto?",
+          "sender": {
+            "email": "luizoliveira2808@gmail.com",
+            "name": "Luiz"
+          }
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/2048px-Unofficial_JavaScript_logo_2.svg.png",
+      "name": "Javascript",
+      "description": "Group dedicated to discussions about React",
+      "created_at": "2021-11-13",
+      "members": [
+        {
+          "email": "luizoliveira2808@gmail.com",
+          "name": "Luiz",
+          "image": "https://images.wallpaperscraft.com/image/single/field_hills_landscape_225569_1280x720.jpg"
+        },
+        {
+          "email": "oliveira@gmail.com",
+          "name": "Oliveira",
+          "image": "https://images.wallpaperscraft.com/image/single/park_path_trees_225560_1280x720.jpg"
+        }
+      ],
+      "messages": [
+        {
+          "id": 0,
+          "message": "Viram a nova funcionalidade?",
+          "sender": {
+            "email": "luizoliveira2808@gmail.com",
+            "name": "Luiz"
+          }
+        }
+      ]
+    }
+  ]
+}

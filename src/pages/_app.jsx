@@ -11,7 +11,8 @@ const theme = {
     sidebarGroup: "rgba(255, 255, 255, .1)",
     textPrimary: "#b1b3b5",
     textSecondary: "#e2e2d9",
-    backgroundPrimary: "#262D31",
+    backgroundPrimary: "#0D1418",
+    message: "#262D31",
   },
 }
 

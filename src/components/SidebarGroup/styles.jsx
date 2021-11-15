@@ -10,6 +10,8 @@ export const Container = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.sidebarGroup};
   transition: background .3s;
 
+  background: ${({ selected, theme }) => selected ? theme.colors.sidebarGroup : ""};
+
   &:hover {
     background: ${({ theme }) => theme.colors.sidebarGroup};
   }

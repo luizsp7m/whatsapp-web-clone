@@ -4,20 +4,23 @@ import CreateGroup from '../CreateGroup';
 
 import { Container, SidebarContent } from './styles';
 
+import { useApp } from '../../hooks/useApp';
+
 export default function Sidebar() {
 
-  let array = [];
-
-  for(let i = 0; i < 10; i++) {
-    array.push(i);
-  }
+  const { groupSelected, setGroupSelected, groups } = useApp();
 
   return (
     <Container>
       <SidebarHeader />
 
       <SidebarContent>
-        { array.map(group => <SidebarGroup key={group} />) }
+        {groups.map(group => <div key={group.id} onClick={() => setGroupSelected(group.id)}>
+          <SidebarGroup
+            group={group}
+            selected={group.id == groupSelected ? true : false}
+          />
+        </div>)}
       </SidebarContent>
 
       <CreateGroup />

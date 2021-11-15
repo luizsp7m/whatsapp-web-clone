@@ -1,18 +1,17 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  height: 100vh;
-  background-color: ${({ theme }) => theme.colors.sidebar};
-  position: relative;
-  border-right: 1px solid ${({ theme }) => theme.colors.sidebarGroup};
-`;
-
-export const SidebarContent = styled.div`
+  padding: 1rem 2rem 63px 2rem;
   overflow-y: auto;
-  height: calc(100vh - 63px);
+  height: calc(100vh - 146px);
 
   display: flex;
-  flex-direction: column;
+  flex-direction: column;  
+
+  gap: 1rem;
+
+  /* align-items: flex-start;
+  justify-content: flex-end; */
 
   &::-webkit-scrollbar {
     width: 6px;
@@ -22,4 +21,4 @@ export const SidebarContent = styled.div`
     background: ${({ theme }) => theme.colors.sidebarGroup};; 
     height: 10px;
   }
-`
+`;

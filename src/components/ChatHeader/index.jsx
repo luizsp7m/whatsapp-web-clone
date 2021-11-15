@@ -2,24 +2,24 @@ import { useApp } from '../../hooks/useApp';
 
 import { Container, GroupInformation, MenuButton } from './styles';
 
-export default function ChatHeader() {
+export default function ChatHeader({ group }) {
 
-  const { showChatSidebar, setShowChatSidebar } = useApp();
+  const { setShowChatSidebar } = useApp();
 
   return (
     <Container>
       <GroupInformation>
         <img 
-          src="https://images.wallpaperscraft.com/image/single/clock_alarm_clock_time_222141_1280x720.jpg" 
-          alt="Group Information" 
+          src={group.image}
+          alt={group.name}
           onClick={() => setShowChatSidebar(true)}
         />
-        <span>What is Lorem Ipsum?</span>
+        <span>{group.name}</span>
       </GroupInformation>
 
       <MenuButton
         size={18}
-        onClick={() => setShowChatSidebar(!showChatSidebar)}
+        onClick={() => setShowChatSidebar(true)}
       />
     </Container>
   );
