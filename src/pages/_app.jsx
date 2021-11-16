@@ -1,8 +1,9 @@
-import { ThemeProvider } from 'styled-components'
+import { ThemeProvider } from 'styled-components';
 
-import { AppProvider } from '../contexts/AppContext'
+import { AuthProvider } from '../contexts/AuthContext';
+import { AppProvider } from '../contexts/AppContext';
 
-import { GlobalStyle } from '../styles/GlobalStyle'
+import { GlobalStyle } from '../styles/GlobalStyle';
 
 const theme = {
   colors: {
@@ -18,11 +19,13 @@ const theme = {
 
 export default function App({ Component, pageProps }) {
   return (
-    <AppProvider>
-      <GlobalStyle />
-      <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </AppProvider>
+    <AuthProvider>
+      <AppProvider>
+        <GlobalStyle />
+        <ThemeProvider theme={theme}>
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </AppProvider>
+    </AuthProvider>
   )
 }

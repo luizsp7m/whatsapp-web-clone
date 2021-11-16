@@ -4,14 +4,14 @@ import { BsFillChatLeftTextFill, BsPlus } from 'react-icons/bs';
 
 import { useApp } from '../../hooks/useApp';
 
-export default function HeaderSidebar() {
+export default function HeaderSidebar({ user }) {
 
   const { setShowCreateGroup } = useApp();
 
   return (
     <Container>
       <ProfileImage>
-        <img src="https://images.wallpaperscraft.com/image/single/monster_cute_art_126913_1280x720.jpg" alt="Profile Image" />
+        <img src={user.avatar} alt={user.name} />
       </ProfileImage>
 
       <Icons>

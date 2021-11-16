@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import { useApp } from '../../hooks/useApp';
 
 import { Container, Description, Header, CloseButton, Members, Wrapper } from './styles';
@@ -5,6 +7,16 @@ import { Container, Description, Header, CloseButton, Members, Wrapper } from '.
 export default function ChatSidebar() {
 
   const { showChatSidebar, groups, groupSelected, setShowChatSidebar } = useApp();
+
+  const [indexSelected, setIndexSelected] = useState();
+
+  useEffect(() => {
+    groups.map(group => {
+      if(groupSelected === group.id) {
+        setIndexSelected(group);
+      }
+    })
+  }, [groupSelected]);
 
   return (
     <Container showChatSidebar={showChatSidebar}>
@@ -15,20 +27,20 @@ export default function ChatSidebar() {
 
       <Wrapper>
         <Description>
-          <img src={groups[groupSelected].image} alt={groups[groupSelected].name} />
+          <img src={indexSelected?.image} alt={indexSelected?.name} />
 
           <div>
-            <h1>{groups[groupSelected].name}</h1>
-            <p>Grupo - {groups[groupSelected].members.length} {groups[groupSelected].members.length > 1 ? "participantes" : "participante"}</p>
+            <h1>{indexSelected?.name}</h1>
+            <p>Grupo - {indexSelected?.members.length} {indexSelected?.members.length > 1 ? "participantes" : "participante"}</p>
           </div>
 
-          <p>{groups[groupSelected].description}</p>
+          <p>{indexSelected?.description}</p>
         </Description>
 
         <Members>
-          <h3>{groups[groupSelected].members.length} {groups[groupSelected].members.length > 1 ? "participantes" : "participante"}</h3>
+          <h3>{indexSelected?.members.length} {indexSelected?.members.length > 1 ? "participantes" : "participante"}</h3>
 
-          {groups[groupSelected].members.map((member, index) => (
+          {indexSelected?.members.map((member, index) => (
             <div key={index}>
               <img src={member.image} alt={member.name} />
               <div>

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.form`
   height: 63px;
   background-color: ${({ theme }) => theme.colors.sidebarHeader};
   display: flex;
