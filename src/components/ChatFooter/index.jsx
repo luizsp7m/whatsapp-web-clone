@@ -2,33 +2,39 @@ import { Container } from './styles';
 
 import { RiSendPlaneFill } from 'react-icons/ri';
 
+import { useState } from 'react';
+
 import { useApp } from '../../hooks/useApp';
+import { useAuth } from '../../hooks/useAuth';
 
 import { firebase } from '../../services/firebase';
 
-import { useState } from 'react';
-import { useAuth } from '../../hooks/useAuth';
-
 export default function ChatFooter() {
 
-  const { showChatSidebar, groupSelected } = useApp();
+  const { showChatSidebar, idGroupSelected } = useApp();
   const { user } = useAuth();
 
   const [message, setMessage] = useState("");
 
-  async function handleCreateMessage(event) {
+  async function createMessage(event) {
     event.preventDefault();
 
-    await firebase.database().ref(`/groups/${groupSelected}/messages`).push({
+    const data = {
       message,
-      sender: user,
-    });
+      sender: user
+    }
 
-    setMessage("");
+    try {
+      await firebase.database().ref(`/groups/${idGroupSelected}/messages`).push(data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setMessage("");
+    }
   }
 
   return (
-    <Container onSubmit={handleCreateMessage} showChatSidebar={showChatSidebar}>
+    <Container onSubmit={createMessage} showChatSidebar={showChatSidebar}>
       <input
         type="text"
         placeholder="Digite uma mensagem"

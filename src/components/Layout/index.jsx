@@ -5,21 +5,21 @@ import Chat from '../Chat';
 
 import { Container } from "./styles";
 
-import { useApp } from '../../hooks/useApp';
 import { useAuth } from '../../hooks/useAuth';
+
+import { Fragment, useEffect } from 'react';
 
 import Router from 'next/router';
 
-import { useEffect } from 'react';
+import { useApp } from '../../hooks/useApp';
 
 export default function Layout() {
 
-  const { groupSelected } = useApp();
-
   const { user, loadingUser } = useAuth();
+  const { idGroupSelected } = useApp();
 
   useEffect(() => {
-    !loadingUser && !user && Router.push('/signin')
+    !loadingUser && !user && Router.push('/signin');
   }, [loadingUser]);
 
   return (
@@ -28,10 +28,12 @@ export default function Layout() {
         <title>Whatsapp Clone</title>
       </Head>
 
-      {!loadingUser && user && <>
-        <Sidebar />
-        {groupSelected && <Chat />}
-      </>}
+      {!loadingUser && user && (
+        <Fragment>
+          <Sidebar />
+          { idGroupSelected && <Chat /> }
+        </Fragment>
+      )}
     </Container>
   );
 }

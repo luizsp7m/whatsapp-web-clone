@@ -6,11 +6,10 @@ export const Container = styled.div`
   position: absolute;
   top: 0; bottom: 0;
   left: 0; right: 0;
-  background: ${({ theme }) => theme.colors.sidebar };
+  background: ${({ theme }) => theme.colors.sidebar};
   transform: ${({ showCreateGroup }) => showCreateGroup ? "translateX(0)" : "translateX(-100%)"};
   transition: transform .3s ease-in-out;
-
-  /* overflow-y: hidden; */
+  cursor: default;
 `;
 
 export const Icon = styled(BiArrowBack)`
@@ -29,8 +28,29 @@ export const Header = styled.div`
   gap: 1rem;
   padding: 0 1rem;
   color: ${({ theme }) => theme.colors.textPrimary};
+  background-color: ${({ theme }) => theme.colors.sidebar};
   font-size: 1.25rem;
   cursor: default;
+
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+`
+
+export const Wrapper = styled.div`
+  height: calc(100vh - 63px);
+  padding-top: 63px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.colors.sidebarGroup};; 
+    height: 10px;
+  }
 `
 
 export const Form = styled.form`
@@ -75,7 +95,7 @@ export const Input = styled.div`
     font-size: 1.35rem;
   }
 
-  > input, textarea {
+  > input, textarea, select {
     padding: 1rem;
     border-radius: .5rem;
     border: 0;

@@ -3,50 +3,60 @@ import { useEffect, useState } from 'react';
 import { useApp } from '../../hooks/useApp';
 import { useAuth } from '../../hooks/useAuth';
 
-import { Container, Header, Icon, Form, Input } from './styles';
-
 import { firebase } from '../../services/firebase';
+
+import { Container, Header, Icon, Form, Input, Wrapper } from './styles';
 
 export default function CreateGroup() {
 
-  const { showCreateGroup, setShowCreateGroup, groups, allGroups } = useApp();
+  const { showCreateGroup, setShowCreateGroup, allGroups } = useApp();
   const { user } = useAuth();
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [code, setCode] = useState("");
 
-  const [groupsAvaible, setGroupsAvaible] = useState();
-
-  async function handleCreateGroup(event) {
+  async function createNewGroup(event) {
     event.preventDefault();
 
-    await firebase.database().ref(`/groups`).push({
+    const data = {
       image: `https://avatars.dicebear.com/api/initials/${name}.svg`,
-      name: name,
-      description: description,
-      owner: user.id,
-      messages: [],
+      name,
+      description,
+      owner: user,
       members: [user],
-    });
+    }
 
-    setName("");
-    setDescription("");
-    setCode("");
-    setShowCreateGroup(false);
+    try {
+      await firebase.database().ref("groups").push(data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setName("");
+      setDescription("");
+      setCode("");
+      setShowCreateGroup(false);
+    }
   }
 
-  async function handleEnjoyGroup(event) {
+  async function joinGroup(event) {
     event.preventDefault();
 
-    await firebase.database().ref(`/groups/-Moa4RLosw_AeiL9Zdp9/members`).push({
-      user
-    });
+    if (code === "") {
+      alert("Selecione um grupo");
+    } else {
 
-    setName("");
-    setDescription("");
-    setCode("");
-    setShowCreateGroup(false);
+      try {
+        await firebase.database().ref(`/groups/${code}/members`).push(user);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setName("");
+        setDescription("");
+        setCode("");
+        setShowCreateGroup(false);
+      }
+    }
   }
 
   useEffect(() => {
@@ -55,7 +65,7 @@ export default function CreateGroup() {
       setDescription("");
       setCode("");
     }
-  }, [showCreateGroup])
+  }, [showCreateGroup]);
 
   return (
     <Container showCreateGroup={showCreateGroup} >
@@ -67,49 +77,50 @@ export default function CreateGroup() {
         <span>Voltar</span>
       </Header>
 
-      <Form onSubmit={handleCreateGroup}>
-        <h2>Criar grupo</h2>
+      <Wrapper>
+        <Form onSubmit={createNewGroup}>
+          <h2>Criar grupo</h2>
 
-        <Input>
-          <label>Nome do grupo</label>
-          <input
-            type="text"
-            required={true}
-            maxLength="50"
-            onChange={({ target }) => setName(target.value)}
-            value={name}
-          />
-        </Input>
+          <Input>
+            <label>Nome do grupo</label>
+            <input
+              type="text"
+              required={true}
+              maxLength="50"
+              onChange={({ target }) => setName(target.value)}
+              value={name}
+            />
+          </Input>
 
-        <Input>
-          <label>Descrição do grupo</label>
-          <textarea
-            type="text"
-            required={true}
-            maxLength="100"
-            rows="5"
-            onChange={({ target }) => setDescription(target.value)}
-            value={description}
-          />
-        </Input>
+          <Input>
+            <label>Descrição do grupo</label>
+            <textarea
+              type="text"
+              required={true}
+              maxLength="100"
+              rows="5"
+              onChange={({ target }) => setDescription(target.value)}
+              value={description}
+            />
+          </Input>
 
-        <button type="submit">Criar grupo</button>
-      </Form>
+          <button type="submit">Criar grupo</button>
+        </Form>
 
-      <Form onSubmit={handleEnjoyGroup}>
-        <h2>Entrar em grupo existente</h2>
+        <Form onSubmit={joinGroup}>
+          <h2>Entrar em grupo existente</h2>
 
-        <Input>
-          <label>{code}</label>
-          <select onChange={({ target }) => setCode(target.value)}>
-            { allGroups.map((group, index) => <option key={index} value={group.id}>
-              { group.id }
-            </option>) }
-          </select>
-        </Input>
+          <Input>
+            <label>Selecione um grupo</label>
 
-        <button type="submit">Entrar</button>
-      </Form>
+            <select onChange={({ target }) => setCode(target.value)}>
+              {allGroups.map(group => <option key={group.id} value={group.id}>{group.name}</option>)}
+            </select>
+          </Input>
+
+          <button type="submit">Entrar</button>
+        </Form>
+      </Wrapper>
     </Container>
   );
 }

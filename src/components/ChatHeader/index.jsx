@@ -2,18 +2,19 @@ import { useApp } from '../../hooks/useApp';
 
 import { Container, GroupInformation, MenuButton } from './styles';
 
-export default function ChatHeader({ group }) {
+export default function ChatHeader() {
 
-  const { setShowChatSidebar } = useApp();
+  const { setShowChatSidebar, groupSelected } = useApp();
+
   return (
     <Container>
       <GroupInformation>
         <img
-          src={group?.image}
-          alt={group?.name}
+          src={groupSelected?.image}
+          alt={groupSelected?.name}
           onClick={() => setShowChatSidebar(true)}
         />
-        <span>{group?.name}</span>
+        <span>{groupSelected?.name}</span>
       </GroupInformation>
 
       <MenuButton

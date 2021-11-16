@@ -1,12 +1,15 @@
 import { Container, ProfileImage, Icons } from './styles';
 
-import { BsFillChatLeftTextFill, BsPlus } from 'react-icons/bs';
+import { BsPlus } from 'react-icons/bs';
+import { GoSignOut } from 'react-icons/go';
 
 import { useApp } from '../../hooks/useApp';
+import { useAuth } from '../../hooks/useAuth';
 
-export default function HeaderSidebar({ user }) {
+export default function SidebarHeader() {
 
   const { setShowCreateGroup } = useApp();
+  const { user, signOut } = useAuth();
 
   return (
     <Container>
@@ -15,8 +18,8 @@ export default function HeaderSidebar({ user }) {
       </ProfileImage>
 
       <Icons>
-        <button>
-          <BsFillChatLeftTextFill size={18} />
+        <button onClick={signOut}>
+          <GoSignOut size={18} />
         </button>
 
         <button onClick={() => setShowCreateGroup(true)}>

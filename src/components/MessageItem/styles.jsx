@@ -21,6 +21,7 @@ export const Container = styled.div`
   }
 
   > p {
+    min-width: 200px;
     max-width: 400px;
     font-size: 1.35rem;
     letter-spacing: .05rem;

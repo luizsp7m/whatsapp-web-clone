@@ -2,32 +2,41 @@ import { useEffect, useState } from 'react';
 
 import MessageItem from '../MessageItem';
 
-import { useApp } from '../../hooks/useApp'
-
 import { Container } from './styles';
 
-export default function Messages({ group }) {
+import { firebase } from '../../services/firebase';
 
-  const [messages, setMessages] = useState();
+import { useApp } from '../../hooks/useApp';
+
+export default function Messages() {
+
+  const { idGroupSelected } = useApp();
+
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    const messagesFormatted = [];
+    const groupRef = firebase.database().ref(`groups/${idGroupSelected}/messages`);
+    groupRef.on("value", messages => {
+      const data = messages.val();
 
-    for(let id in group?.messages) {
-      messagesFormatted.push({
-        id: group.messages[id], ...group.messages[id]
-      });
+      let arrayGroupMessages = [];
 
-      setMessages(messagesFormatted);
-    }
-  }, [group]);
+      for(let id in data) {
+        arrayGroupMessages.push({
+          id, ...data[id]
+        });
+      }
+
+      setMessages(arrayGroupMessages);
+    });
+  }, [idGroupSelected]);
 
   return (
     <Container>
-      {messages?.map((message, index) => <MessageItem
-        key={index}
+      { messages.map(message => <MessageItem
+        key={message.id}
         message={message}
-      />)}
+      />) }
     </Container>
   );
 }

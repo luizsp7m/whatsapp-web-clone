@@ -1,10 +1,8 @@
-import { createContext, useEffect, useMemo, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
-import { useAuth } from "../hooks/useAuth";
+import { firebase } from '../services/firebase';
 
-import { useGroups } from '../hooks/useGroups';
-
-import { database } from '../services/firebase';
+import { useAuth } from '../hooks/useAuth';
 
 const AppContext = createContext();
 
@@ -13,48 +11,66 @@ function AppProvider({ children }) {
   const [showCreateGroup, setShowCreateGroup] = useState(false);
   const [showChatSidebar, setShowChatSidebar] = useState(false);
 
-  const [groups, setGroups] = useState([]);
   const [allGroups, setAllGroups] = useState([]);
-
-  // Get data from Firebase
+  const [groupsParticipate, setGroupsParticipate] = useState([]);
+  const [idGroupSelected, setIdGroupSelected] = useState("");
   const [groupSelected, setGroupSelected] = useState();
-  const [loadingGroups, setLoadingGroups] = useState(true);
 
-  const { user, loadingUser } = useAuth();
+  const { user } = useAuth();
 
   useEffect(() => {
-    if (!loadingUser && user) {
-      const groupsRef = database.ref(`/groups`);
+    const groupsRef = firebase.database().ref("groups");
 
-      groupsRef.on('value', snapshot => {
-        const data = snapshot.val();
+    groupsRef.on("value", groups => {
+      const data = groups.val();
 
-        const groupsParticipate = [];
-        const allGroupsArray = [];
+      let arrayAllGroups = [];
+      let arrayGroupsParticipate = [];
 
-        for (let group in data) {
-          allGroupsArray.push({
-            id: group, ...data[group]
-          });
+      for (let id in data) {
+        arrayAllGroups.push({
+          id, ...data[id],
+        });
+      }
 
-          for (let member in data[group].members) {
-            if (data[group].members[member].id === user.id) {
-              groupsParticipate.push({
-                id: group, ...data[group],
-              });
-            }
+      arrayAllGroups.map(group => {
+        for(let member in group.members) {
+          if(group.members[member]?.id === user?.id) {
+            arrayGroupsParticipate.push(group);
           }
         }
+      })
 
-        setAllGroups(allGroupsArray);
-        setGroups(groupsParticipate);
+      setGroupsParticipate(arrayGroupsParticipate);
 
-        return () => {
-          groupRef.off('value');
-        }
-      });
-    }
-  }, [loadingUser]);
+      setAllGroups(arrayAllGroups);
+
+      return () => {
+        groupsRef.off('value');
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    // const groupRef = firebase.database().ref(`groups/${idGroupSelected}`);
+
+    // groupRef.on("value", group => {
+    //   const data = group.val();
+
+    //   setGroupSelected(data);
+
+    //   return () => {
+    //     groupRef.off('value');
+    //   }
+    // });
+
+    allGroups.map(group => {
+      if(group.id === idGroupSelected) {
+        setGroupSelected(group);
+      }
+    })
+
+  }, [idGroupSelected, allGroups]);
 
   return (
     <AppContext.Provider value={{
@@ -62,10 +78,11 @@ function AppProvider({ children }) {
       setShowCreateGroup,
       showChatSidebar,
       setShowChatSidebar,
-      groups,
       allGroups,
+      idGroupSelected,
+      setIdGroupSelected,
       groupSelected,
-      setGroupSelected
+      groupsParticipate,
     }}>
       {children}
     </AppContext.Provider>

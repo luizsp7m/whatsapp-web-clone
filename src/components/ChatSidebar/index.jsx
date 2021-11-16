@@ -1,22 +1,10 @@
-import { useEffect, useState } from 'react';
-
 import { useApp } from '../../hooks/useApp';
 
 import { Container, Description, Header, CloseButton, Members, Wrapper } from './styles';
 
 export default function ChatSidebar() {
 
-  const { showChatSidebar, groups, groupSelected, setShowChatSidebar } = useApp();
-
-  const [indexSelected, setIndexSelected] = useState();
-
-  useEffect(() => {
-    groups.map(group => {
-      if(groupSelected === group.id) {
-        setIndexSelected(group);
-      }
-    })
-  }, [groupSelected]);
+  const { showChatSidebar, setShowChatSidebar, groupSelected } = useApp();
 
   return (
     <Container showChatSidebar={showChatSidebar}>
@@ -27,28 +15,26 @@ export default function ChatSidebar() {
 
       <Wrapper>
         <Description>
-          <img src={indexSelected?.image} alt={indexSelected?.name} />
+          <img src={groupSelected?.image} alt={groupSelected?.name} />
 
           <div>
-            <h1>{indexSelected?.name}</h1>
-            <p>Grupo - {indexSelected?.members.length} {indexSelected?.members.length > 1 ? "participantes" : "participante"}</p>
+            <h1>{groupSelected?.name}</h1>
+            <p>Número de participantes</p>
           </div>
 
-          <p>{indexSelected?.description}</p>
+          <p>{groupSelected?.description}</p>
         </Description>
 
         <Members>
-          <h3>{indexSelected?.members.length} {indexSelected?.members.length > 1 ? "participantes" : "participante"}</h3>
+          <h3>Número de participantes</h3>
 
-          {indexSelected?.members.map((member, index) => (
-            <div key={index}>
-              <img src={member.image} alt={member.name} />
-              <div>
-                <span>{member.name}</span>
-                <label>{member.email}</label>
-              </div>
+          <div>
+            <img src="https://avatars.dicebear.com/api/initials/Clone.svg" alt="Imagem" />
+            <div>
+              <span>Luiz</span>
+              <label>luizoliveira2808@gmail.com</label>
             </div>
-          ))}
+          </div>
         </Members>
       </Wrapper>
     </Container>

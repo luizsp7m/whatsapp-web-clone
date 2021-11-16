@@ -1,28 +1,30 @@
 import SidebarHeader from '../SidebarHeader';
-import SidebarGroup from '../SidebarGroup';
+import SidebarItem from '../SidebarItem';
 import CreateGroup from '../CreateGroup';
 
 import { Container, SidebarContent } from './styles';
 
 import { useApp } from '../../hooks/useApp';
-import { useAuth } from '../../hooks/useAuth';
 
 export default function Sidebar() {
 
-  const { groupSelected, setGroupSelected, groups } = useApp();
-  const { user } = useAuth();
+  const { allGroups, idGroupSelected, setIdGroupSelected } = useApp();
 
   return (
     <Container>
-      <SidebarHeader user={user} />
+      <SidebarHeader />
 
       <SidebarContent>
-        {groups.map(group => <div key={group.id} onClick={() => setGroupSelected(group.id)}>
-          <SidebarGroup
-            group={group}
-            selected={group.id == groupSelected ? true : false}
-          />
-        </div>)}
+        {allGroups.map(group => {
+          return (
+            <div key={group.id} onClick={() => setIdGroupSelected(group.id)}>
+              <SidebarItem
+                group={group}
+                selected={group.id === idGroupSelected ? true : false}
+              />
+            </div>
+          )
+        })}
       </SidebarContent>
 
       <CreateGroup />
