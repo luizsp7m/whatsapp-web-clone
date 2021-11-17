@@ -1,11 +1,11 @@
 import { Container } from './styles';
 
-export default function MessageItem({ message }) {
+export default function MessageItem({ message, alignRight }) {
+
   return (
-    <Container alignRight={false}>
-      <span>Nome</span>
-      <p>Mensagem</p>
-      <label>13/11/2021 19:07</label>
+    <Container alignRight={alignRight}>
+      <span>{message.sender.name}</span>
+      <p>{message.message}</p>
     </Container>
   );
 }

@@ -2,19 +2,34 @@ import { Container } from './styles';
 
 import { RiSendPlaneFill } from 'react-icons/ri';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useApp } from '../../hooks/useApp';
+import { useAuth } from '../../hooks/useAuth';
+
+import { firebase } from '../../services/firebase';
 
 export default function ChatFooter() {
 
-  const { showChatSidebar } = useApp();
+  const { showChatSidebar, groupSelected } = useApp();
+  const { user } = useAuth();
 
   const [message, setMessage] = useState("");
 
   async function createMessage(event) {
     event.preventDefault();
+
+    firebase.database().ref(`/groups/${groupSelected}/messages`).push({
+      message,
+      sender: user,
+    });
+
+    setMessage("");
   }
+
+  useEffect(() => {
+    setMessage("");
+  }, [groupSelected]);
 
   return (
     <Container onSubmit={createMessage} showChatSidebar={showChatSidebar}>

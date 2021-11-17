@@ -13,7 +13,7 @@ export const Container = styled.div`
 
   cursor: default;
 
-  margin: auto 0 0 0;
+  /* margin: auto 0 0 0; */
 
   > span {
     font-size: 1.35rem;

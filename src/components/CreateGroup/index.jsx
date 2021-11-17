@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useApp } from '../../hooks/useApp';
 import { useAuth } from '../../hooks/useAuth';
+import { useGroup } from '../../hooks/useGroup';
 
 import { firebase } from '../../services/firebase';
 
@@ -14,21 +15,26 @@ export default function CreateGroup() {
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [code, setCode] = useState("");
 
   async function createNewGroup(event) {
     event.preventDefault();
-  }
 
-  async function joinGroup(event) {
-    event.preventDefault();
+    firebase.database().ref('/groups').push({
+      image: `https://avatars.dicebear.com/api/initials/${name.replaceAll(" ", "")}.svg`,
+      name,
+      description,
+    });
+
+    setName("");
+    setDescription("");
+
+    setShowCreateGroup(false);
   }
 
   useEffect(() => {
     if (!showCreateGroup) {
       setName("");
       setDescription("");
-      setCode("");
     }
   }, [showCreateGroup]);
 
@@ -70,22 +76,6 @@ export default function CreateGroup() {
           </Input>
 
           <button type="submit">Criar grupo</button>
-        </Form>
-
-        <Form onSubmit={joinGroup}>
-          <h2>Entrar em grupo existente</h2>
-
-          <Input>
-            <label>Selecione um grupo</label>
-
-            <select onChange={({ target }) => setCode(target.value)}>
-              <option>Grupo 1</option>
-              <option>Grupo 2</option>
-              <option>Grupo 3</option>
-            </select>
-          </Input>
-
-          <button type="submit">Entrar</button>
         </Form>
       </Wrapper>
     </Container>

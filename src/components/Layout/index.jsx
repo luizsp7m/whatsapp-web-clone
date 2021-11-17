@@ -1,6 +1,7 @@
 import Head from 'next/head';
 
 import Sidebar from "../Sidebar";
+
 import Chat from '../Chat';
 
 import { Container } from "./styles";
@@ -16,6 +17,7 @@ import { useApp } from '../../hooks/useApp';
 export default function Layout() {
 
   const { user, loadingUser } = useAuth();
+  const { groupSelected } = useApp();
 
   useEffect(() => {
     !loadingUser && !user && Router.push('/signin');
@@ -30,7 +32,7 @@ export default function Layout() {
       {!loadingUser && user && (
         <Fragment>
           <Sidebar />
-          <Chat />
+          { groupSelected && <Chat /> }
         </Fragment>
       )}
     </Container>

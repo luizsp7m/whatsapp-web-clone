@@ -2,7 +2,7 @@ import { useApp } from '../../hooks/useApp';
 
 import { Container, Description, Header, CloseButton, Members, Wrapper } from './styles';
 
-export default function ChatSidebar() {
+export default function ChatSidebar({ group }) {
 
   const { showChatSidebar, setShowChatSidebar } = useApp();
 
@@ -15,18 +15,16 @@ export default function ChatSidebar() {
 
       <Wrapper>
         <Description>
-          <img src="https://avatars.dicebear.com/api/initials/luiz.svg" alt="Grupo" />
+          <img src={group.image} alt={group.name} />
 
           <div>
-            <h1>Nome do grupo</h1>
-            <p>Número de participantes</p>
+            <h1>{group.name}</h1>
+            <p>{group.description}</p>
           </div>
-
-          <p>Descrição do grupo</p>
         </Description>
 
-        <Members>
-          <h3>Número de participantes</h3>
+        {/* <Members>
+          <h3>Participantes</h3>
 
           <div>
             <img src="https://avatars.dicebear.com/api/initials/Clone.svg" alt="Imagem" />
@@ -35,7 +33,7 @@ export default function ChatSidebar() {
               <label>luizoliveira2808@gmail.com</label>
             </div>
           </div>
-        </Members>
+        </Members> */}
       </Wrapper>
     </Container>
   );
