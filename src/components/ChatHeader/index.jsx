@@ -4,17 +4,17 @@ import { Container, GroupInformation, MenuButton } from './styles';
 
 export default function ChatHeader() {
 
-  const { setShowChatSidebar, groupSelected } = useApp();
+  const { setShowChatSidebar } = useApp();
 
   return (
     <Container>
       <GroupInformation>
         <img
-          src={groupSelected?.image}
-          alt={groupSelected?.name}
+          src="https://avatars.dicebear.com/api/initials/luiz.svg"
+          alt="Imagem do grupo"
           onClick={() => setShowChatSidebar(true)}
         />
-        <span>{groupSelected?.name}</span>
+        <span>Nome do grupo</span>
       </GroupInformation>
 
       <MenuButton

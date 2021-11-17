@@ -4,7 +4,7 @@ import { Container, Description, Header, CloseButton, Members, Wrapper } from '.
 
 export default function ChatSidebar() {
 
-  const { showChatSidebar, setShowChatSidebar, groupSelected } = useApp();
+  const { showChatSidebar, setShowChatSidebar } = useApp();
 
   return (
     <Container showChatSidebar={showChatSidebar}>
@@ -15,14 +15,14 @@ export default function ChatSidebar() {
 
       <Wrapper>
         <Description>
-          <img src={groupSelected?.image} alt={groupSelected?.name} />
+          <img src="https://avatars.dicebear.com/api/initials/luiz.svg" alt="Grupo" />
 
           <div>
-            <h1>{groupSelected?.name}</h1>
+            <h1>Nome do grupo</h1>
             <p>Número de participantes</p>
           </div>
 
-          <p>{groupSelected?.description}</p>
+          <p>Descrição do grupo</p>
         </Description>
 
         <Members>

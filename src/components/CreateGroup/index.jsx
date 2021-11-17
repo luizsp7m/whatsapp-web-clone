@@ -9,7 +9,7 @@ import { Container, Header, Icon, Form, Input, Wrapper } from './styles';
 
 export default function CreateGroup() {
 
-  const { showCreateGroup, setShowCreateGroup, allGroups } = useApp();
+  const { showCreateGroup, setShowCreateGroup } = useApp();
   const { user } = useAuth();
 
   const [name, setName] = useState("");
@@ -18,45 +18,10 @@ export default function CreateGroup() {
 
   async function createNewGroup(event) {
     event.preventDefault();
-
-    const data = {
-      image: `https://avatars.dicebear.com/api/initials/${name}.svg`,
-      name,
-      description,
-      owner: user,
-      members: [user],
-    }
-
-    try {
-      await firebase.database().ref("groups").push(data);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setName("");
-      setDescription("");
-      setCode("");
-      setShowCreateGroup(false);
-    }
   }
 
   async function joinGroup(event) {
     event.preventDefault();
-
-    if (code === "") {
-      alert("Selecione um grupo");
-    } else {
-
-      try {
-        await firebase.database().ref(`/groups/${code}/members`).push(user);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setName("");
-        setDescription("");
-        setCode("");
-        setShowCreateGroup(false);
-      }
-    }
   }
 
   useEffect(() => {
@@ -114,7 +79,9 @@ export default function CreateGroup() {
             <label>Selecione um grupo</label>
 
             <select onChange={({ target }) => setCode(target.value)}>
-              {allGroups.map(group => <option key={group.id} value={group.id}>{group.name}</option>)}
+              <option>Grupo 1</option>
+              <option>Grupo 2</option>
+              <option>Grupo 3</option>
             </select>
           </Input>
 

@@ -16,7 +16,6 @@ import { useApp } from '../../hooks/useApp';
 export default function Layout() {
 
   const { user, loadingUser } = useAuth();
-  const { idGroupSelected } = useApp();
 
   useEffect(() => {
     !loadingUser && !user && Router.push('/signin');
@@ -31,7 +30,7 @@ export default function Layout() {
       {!loadingUser && user && (
         <Fragment>
           <Sidebar />
-          { idGroupSelected && <Chat /> }
+          <Chat />
         </Fragment>
       )}
     </Container>

@@ -2,15 +2,15 @@ import { useEffect, useState } from 'react';
 
 import { Container, GroupImage, GroupInformation } from './styles';
 
-export default function SidebarItem({ group, selected }) {
+export default function SidebarItem() {
   return (
-    <Container selected={selected}>
+    <Container selected={false}>
       <GroupImage>
-        <img src={group.image} alt={group.name} />
+        <img src="https://avatars.dicebear.com/api/initials/luiz.svg" alt="Imagem do grupo" />
       </GroupImage>
 
       <GroupInformation>
-        <h5>{group.name}</h5>
+        <h5>Nome do grupo</h5>
         <p>Última mensagem enviada no grupo [dinâmica]</p>
       </GroupInformation>
     </Container>
