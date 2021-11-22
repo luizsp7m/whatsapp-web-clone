@@ -12,24 +12,54 @@ export default function CreateGroup() {
 
   const { showCreateGroup, setShowCreateGroup } = useApp();
   const { user } = useAuth();
+  const { groups } = useGroup();
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [groupId, setGroupId] = useState();
+  const [dontParticipate, setDontParticipate] = useState([]);
 
   async function createNewGroup(event) {
     event.preventDefault();
 
     firebase.database().ref('/groups').push({
-      image: `https://avatars.dicebear.com/api/initials/${name.replaceAll(" ", "")}.svg`,
+      image: `https://avatars.dicebear.com/api/initials/${name}.svg`,
       name,
       description,
+      owner: user.id,
+    }).then(response => {
+      firebase.database().ref(`/groups/${response.key}/members`).push(user);
+      setName("");
+      setDescription("");
+      setGroupId(undefined);
+      setShowCreateGroup(false);
+    });
+  }
+
+  async function joinGroup(event) {
+    event.preventDefault();
+
+    if (!groupId) {
+      return alert("Selecione um grupo");
+    }
+
+    firebase.database().ref(`/groups/${groupId}/members`).push(user).then(() => {
+      setName("");
+      setDescription("");
+      setGroupId(undefined);
+      setShowCreateGroup(false);
+    });
+  }
+
+  useEffect(() => {
+    let groupArray = [];
+
+    groups.map(group => {
+      !group.members.find(member => member.memberId === user.id) && groupArray.push(group);
     });
 
-    setName("");
-    setDescription("");
-
-    setShowCreateGroup(false);
-  }
+    setDontParticipate(groupArray);
+  }, [groups]);
 
   useEffect(() => {
     if (!showCreateGroup) {
@@ -76,6 +106,26 @@ export default function CreateGroup() {
           </Input>
 
           <button type="submit">Criar grupo</button>
+        </Form>
+
+        <Form onSubmit={joinGroup}>
+          <h2>Grupos</h2>
+
+          <Input>
+            <label>Grupos disponíveis</label>
+
+            <select onChange={({ target }) => setGroupId(target.value)}>
+              <option value={undefined}>Selecione um grupo</option>
+
+              {dontParticipate.map(group => (
+                <option key={group.id} value={group.id}>
+                  {group.name}
+                </option>
+              ))}
+            </select>
+          </Input>
+
+          <button type="submit">Entrar no grupo</button>
         </Form>
       </Wrapper>
     </Container>

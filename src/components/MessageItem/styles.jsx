@@ -1,5 +1,20 @@
 import styled from 'styled-components';
 
+import { AiFillDelete } from 'react-icons/ai';
+
+export const IconDelete = styled(AiFillDelete)`
+  color: ${({ theme }) => theme.colors.textSecondary};
+  position: absolute;
+  right: 1rem;
+  opacity: 0;
+  transition: .25s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(.75);
+  }
+`
+
 export const Container = styled.div`
   padding: 1rem;
   border-radius: 1rem;
@@ -9,9 +24,13 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
 
-  align-self: ${({ alignRight }) => alignRight ? "flex-end" : "flex-start"};
+  align-self: ${({ mine }) => mine ? "flex-end" : "flex-start"};
 
   cursor: default;
+
+  &:hover ${IconDelete} {
+    opacity: 1;
+  }
 
   /* margin: auto 0 0 0; */
 

@@ -28,7 +28,7 @@ export default function Messages({ group }) {
       {messages.map(message => <MessageItem
         key={message.id}
         message={message}
-        alignRight={user.id === message.sender.id}
+        mine={user.id === message.sender.id}
       />)}
     </Container>
   );

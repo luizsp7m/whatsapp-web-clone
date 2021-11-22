@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import { useApp } from '../../hooks/useApp';
 
 import { Container, Description, Header, CloseButton, Members, Wrapper } from './styles';
@@ -5,6 +7,22 @@ import { Container, Description, Header, CloseButton, Members, Wrapper } from '.
 export default function ChatSidebar({ group }) {
 
   const { showChatSidebar, setShowChatSidebar } = useApp();
+
+  const [members, setMembers] = useState([]);
+
+  useEffect(() => {
+    let parsedMembers = [];
+
+    for (let id in group.members) {
+      parsedMembers.push({
+        id, ...group.members[id]
+      });
+    }
+
+    console.log(parsedMembers);
+
+    setMembers(parsedMembers);
+  }, [group]);
 
   return (
     <Container showChatSidebar={showChatSidebar}>
@@ -23,17 +41,17 @@ export default function ChatSidebar({ group }) {
           </div>
         </Description>
 
-        {/* <Members>
+        <Members>
           <h3>Participantes</h3>
 
-          <div>
-            <img src="https://avatars.dicebear.com/api/initials/Clone.svg" alt="Imagem" />
+          {members.map(member => <div key={member.id}>
+            <img src={member.avatar} alt={member.name} />
             <div>
-              <span>Luiz</span>
-              <label>luizoliveira2808@gmail.com</label>
+              <span>{member.name}</span>
+              <label>{member.email}</label>
             </div>
-          </div>
-        </Members> */}
+          </div>)}
+        </Members>
       </Wrapper>
     </Container>
   );

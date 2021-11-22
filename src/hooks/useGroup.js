@@ -31,6 +31,15 @@ export function useGroup() {
                   sender: value.sender
                 }
               }),
+              members: Object.entries(value.members ?? {}).map(([key, value]) => {
+                return {
+                  id: key,
+                  memberId: value.id,
+                  email: value.email,
+                  name: value.email,
+                  avatar: value.avatar,
+                }
+              }),
             }
           });
 
