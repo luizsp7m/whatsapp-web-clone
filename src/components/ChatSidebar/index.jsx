@@ -19,8 +19,6 @@ export default function ChatSidebar({ group }) {
       });
     }
 
-    console.log(parsedMembers);
-
     setMembers(parsedMembers);
   }, [group]);
 

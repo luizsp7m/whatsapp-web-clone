@@ -24,6 +24,16 @@ export default function Sidebar() {
       group.members.find(member => member.memberId === user.id) && groupArray.push(group);
     });
 
+    groupArray.sort(function (x, y) {
+      let aLength = x.messages.length - 1;
+      let bLength = y.messages.length - 1;
+
+      let a = aLength >= 0 ? new Date(x.messages[aLength].created_at) : new Date(x.created_at);
+      let b = bLength >= 0 ? new Date(y.messages[bLength].created_at) : new Date(y.created_at);
+
+      return b - a;
+    });
+
     setParticipate(groupArray);
   }, [groups]);
 

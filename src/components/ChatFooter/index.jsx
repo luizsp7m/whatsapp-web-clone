@@ -19,9 +19,12 @@ export default function ChatFooter() {
   async function createMessage(event) {
     event.preventDefault();
 
+    const date = new Date();
+
     firebase.database().ref(`/groups/${groupSelected}/messages`).push({
       message,
       sender: user,
+      created_at: date.toISOString(),
     });
 
     setMessage("");

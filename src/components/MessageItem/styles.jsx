@@ -36,7 +36,8 @@ export const Container = styled.div`
 
   > span {
     font-size: 1.35rem;
-    color: #e67e22;
+    font-weight: 500;
+    color: ${({ mine }) => mine ? '#4cd137' : '#D81B60'};
   }
 
   > p {
@@ -50,7 +51,7 @@ export const Container = styled.div`
 
   > label {
     color: ${({ theme }) => theme.colors.textSecondary};
-    font-size: .9rem;
+    font-size: 1rem;
     text-align: right;
   }
 `;

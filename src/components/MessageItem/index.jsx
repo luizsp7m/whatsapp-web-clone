@@ -4,6 +4,8 @@ import { useApp } from '../../hooks/useApp';
 
 import { firebase } from '../../services/firebase';
 
+import { format } from 'date-fns';
+
 export default function MessageItem({ message, mine }) {
 
   const { groupSelected } = useApp();
@@ -17,9 +19,11 @@ export default function MessageItem({ message, mine }) {
       <span>{message.sender.name}</span>
       <p>{message.message}</p>
 
-      {mine && <IconDelete 
-      onClick={deleteMessage}
-      size={18} 
+      <label>{format(new Date(message.created_at), 'kk:mm')}</label>
+
+      {mine && <IconDelete
+        onClick={deleteMessage}
+        size={18}
       />}
     </Container>
   );

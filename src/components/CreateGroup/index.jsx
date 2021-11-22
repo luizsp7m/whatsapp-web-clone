@@ -8,9 +8,11 @@ import { firebase } from '../../services/firebase';
 
 import { Container, Header, Icon, Form, Input, Wrapper } from './styles';
 
+import { randomColor } from '../../utils/randomColor';
+
 export default function CreateGroup() {
 
-  const { showCreateGroup, setShowCreateGroup } = useApp();
+  const { showCreateGroup, setShowCreateGroup, setGroupSelected } = useApp();
   const { user } = useAuth();
   const { groups } = useGroup();
 
@@ -22,17 +24,24 @@ export default function CreateGroup() {
   async function createNewGroup(event) {
     event.preventDefault();
 
+    const date = new Date();
+
     firebase.database().ref('/groups').push({
       image: `https://avatars.dicebear.com/api/initials/${name}.svg`,
       name,
       description,
       owner: user.id,
+      created_at: date.toISOString(),
     }).then(response => {
-      firebase.database().ref(`/groups/${response.key}/members`).push(user);
+      firebase.database().ref(`/groups/${response.key}/members`).push({
+        color: randomColor(),
+        ...user,
+      });
       setName("");
       setDescription("");
       setGroupId(undefined);
       setShowCreateGroup(false);
+      setGroupSelected(response.key);
     });
   }
 
@@ -43,9 +52,13 @@ export default function CreateGroup() {
       return alert("Selecione um grupo");
     }
 
-    firebase.database().ref(`/groups/${groupId}/members`).push(user).then(() => {
+    firebase.database().ref(`/groups/${groupId}/members`).push({
+      color: randomColor(),
+      ...user,
+    }).then(() => {
       setName("");
       setDescription("");
+      setGroupSelected(groupId);
       setGroupId(undefined);
       setShowCreateGroup(false);
     });

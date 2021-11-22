@@ -32,11 +32,28 @@ export const GroupInformation = styled.div`
   gap: .5rem;
   overflow: hidden;
 
-  > h5 {
-    margin: 0;
-    font-size: 1.45rem;
-    font-weight: 400;
-    color: ${({ theme }) => theme.colors.textSecondary};
+  width: 100%;
+
+  > span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    > h5 {
+      margin: 0;
+      font-size: 1.45rem;
+      font-weight: 400;
+      color: ${({ theme }) => theme.colors.textSecondary};
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    > label {
+      color: ${({ theme }) => theme.colors.textSecondary};
+      font-size: 1.15rem;
+    }
   }
 
   > p {

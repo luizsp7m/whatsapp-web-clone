@@ -24,11 +24,13 @@ export function useGroup() {
               name: value.name,
               description: value.description,
               owner: value.owner,
+              created_at: value.created_at,
               messages: Object.entries(value.messages ?? {}).map(([key, value]) => {
                 return {
                   id: key,
                   message: value.message,
-                  sender: value.sender
+                  sender: value.sender,
+                  created_at: value.created_at,
                 }
               }),
               members: Object.entries(value.members ?? {}).map(([key, value]) => {
