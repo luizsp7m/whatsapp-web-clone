@@ -5,6 +5,14 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.sidebar};
   position: relative;
   border-right: 1px solid ${({ theme }) => theme.colors.sidebarGroup};
+
+  @media(max-width: 768px) {
+    transition: transform .3s ease-in-out;
+    width: 100%;
+    position: fixed;
+    /* transform: ${({ showChat }) => showChat ? 'translateX(-100%)' : 'translateX(0)'};     */
+    /* display: ${({ showChat }) => showChat ? 'none' : 'block'}; */
+  }
 `;
 
 export const SidebarContent = styled.div`

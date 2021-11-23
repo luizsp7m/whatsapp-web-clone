@@ -11,6 +11,10 @@ export const Container = styled.div`
   border-left: 1px solid ${({ theme }) => theme.colors.sidebarGroup};
   transition: transform .3s ease-in-out;
   cursor: default;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const Header = styled.div`

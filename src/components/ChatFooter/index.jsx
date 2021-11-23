@@ -1,6 +1,4 @@
-import { Container } from './styles';
-
-import { RiSendPlaneFill } from 'react-icons/ri';
+import { Container, IconSend } from './styles';
 
 import { useEffect, useState } from 'react';
 
@@ -45,7 +43,7 @@ export default function ChatFooter() {
       />
 
       <button type="submit">
-        <RiSendPlaneFill size={18} />
+        <IconSend size={18} />
       </button>
     </Container>
   );

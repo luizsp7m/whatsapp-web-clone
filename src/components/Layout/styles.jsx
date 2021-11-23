@@ -5,4 +5,8 @@ export const Container = styled.div`
   grid-template-columns: 350px 1fr;
   background-color: ${({ theme }) => theme.colors.backgroundPrimary };
   min-height: 100vh;
+
+  @media(max-width: 768px) {
+    display: flex;
+  }
 `;

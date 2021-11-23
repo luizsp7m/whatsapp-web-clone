@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { BsThreeDotsVertical } from 'react-icons/bs';
+import { BiArrowBack } from 'react-icons/bi';
 
 export const Container = styled.div`
   display: flex;
@@ -40,5 +41,20 @@ export const MenuButton = styled(BsThreeDotsVertical)`
 
   &:hover {
     filter: brightness(.75);
+  }
+`
+
+export const IconBack = styled(BiArrowBack)`
+  display: none;
+
+  @media(max-width: 768px) {
+    display: block;
+    cursor: pointer;
+    transition: filter .3s;
+    color: ${({ theme }) => theme.colors.textPrimary};
+
+    &:hover {
+      filter: brightness(.75);
+    }
   }
 `

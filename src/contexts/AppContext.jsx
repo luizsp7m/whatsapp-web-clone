@@ -7,6 +7,8 @@ function AppProvider({ children }) {
   const [showCreateGroup, setShowCreateGroup] = useState(false);
   const [showChatSidebar, setShowChatSidebar] = useState(false);
 
+  const [showChat, setShowChat] = useState(false);
+
   const [groupSelected, setGroupSelected] = useState();
 
   return (
@@ -16,7 +18,9 @@ function AppProvider({ children }) {
       showChatSidebar,
       setShowChatSidebar,
       groupSelected, 
-      setGroupSelected
+      setGroupSelected,
+      showChat, 
+      setShowChat,
     }}>
       {children}
     </AppContext.Provider>

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { RiSendPlaneFill } from 'react-icons/ri';
+
 export const Container = styled.form`
   height: 63px;
   background-color: ${({ theme }) => theme.colors.sidebarHeader};
@@ -12,10 +14,14 @@ export const Container = styled.form`
   left: 0; right: ${({ showChatSidebar }) => showChatSidebar ? "350px" : "0" };
   bottom: 0;
 
-  transition: .3s ease-in-out;
+  transition: right .3s ease-in-out;
+
+  @media (max-width: 768px) {
+    right: 0;
+  }
 
   > input {
-    width: 100%;
+    width: 95%;
     background-color: rgba(0, 0, 0, .1);
     border: 0;
     padding: 1.5rem 2rem;
@@ -40,3 +46,7 @@ export const Container = styled.form`
     }
   }
 `;
+
+export const IconSend = styled(RiSendPlaneFill)`
+  color: ${({ theme }) => theme.colors.textPrimary};;
+`

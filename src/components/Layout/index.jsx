@@ -26,13 +26,13 @@ export default function Layout() {
   return (
     <Container>
       <Head>
-        <title>Whatsapp Clone</title>
+        <title>WhatsApp Clone</title>
       </Head>
 
       {!loadingUser && user && (
         <Fragment>
           <Sidebar />
-          { groupSelected && <Chat /> }
+          {groupSelected && <Chat />}
         </Fragment>
       )}
     </Container>

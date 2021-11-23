@@ -12,11 +12,11 @@ import { Fragment } from 'react';
 
 export default function Chat() {
 
-  const { showChatSidebar } = useApp();
+  const { showChatSidebar, showChat } = useApp();
   const { group, loading } = useGroupSelected();
 
   return (
-    <Container showChatSidebar={showChatSidebar}>
+    <Container showChatSidebar={showChatSidebar} showChat={showChat}>
       {!loading && group && <Fragment>
         <ChatHeader group={group} />
         <Messages group={group} />

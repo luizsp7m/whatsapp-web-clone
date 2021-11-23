@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 
 export default function Sidebar() {
   const { groups } = useGroup();
-  const { groupSelected, setGroupSelected } = useApp();
+  const { groupSelected, setGroupSelected, showChat, setShowChat } = useApp();
   const { user } = useAuth()
 
   const [participate, setParticipate] = useState([]);
@@ -38,13 +38,16 @@ export default function Sidebar() {
   }, [groups]);
 
   return (
-    <Container>
+    <Container showChat={showChat}>
       <SidebarHeader />
 
       <SidebarContent>
         {participate.map(group => {
           return (
-            <div key={group.id} onClick={() => setGroupSelected(group.id)}>
+            <div key={group.id} onClick={() => {
+              setGroupSelected(group.id);
+              setShowChat(true);
+            }}>
               <SidebarItem group={group} selected={groupSelected === group.id ? true : false} />
             </div>
           )
