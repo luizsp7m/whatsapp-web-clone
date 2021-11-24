@@ -46,7 +46,7 @@ export default function Login() {
   return (
     <Container>
       <Image>
-        <img src="https://images.wallpaperscraft.com/image/single/forest_trees_needles_226197_1280x720.jpg" alt="Hero" />
+        <img src="/assets/hero.jpg" alt="Hero" />
       </Image>
 
       <Wrapper>
