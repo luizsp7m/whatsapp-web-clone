@@ -75,9 +75,9 @@ export const Form = styled.form`
     outline: 0;
     border-radius: .5rem;
     cursor: pointer;
-    background-color: ${({ theme }) => theme.colors.backgroundPrimary};
+    background-color: ${({ theme }) => theme.colors.buttonPrimary};
     transition: filter .2s ease-in-out;
-    color: ${({ theme }) => theme.colors.textSecondary};;
+    color: #fafafa;
 
     &:hover {
       filter: brightness(.75);
@@ -100,7 +100,6 @@ export const Input = styled.div`
     border-radius: .5rem;
     border: 0;
     outline: 0;
-    color: ${({ theme }) => theme.colors.aa};
     resize: none;
     background-color: ${({ theme }) => theme.colors.message};
     color: ${({ theme }) => theme.colors.textSecondary};
