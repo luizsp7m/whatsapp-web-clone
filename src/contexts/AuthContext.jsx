@@ -21,10 +21,6 @@ function AuthProvider({ children }) {
     if (result.user) {
       const { displayName, photoURL, uid, email } = result.user;
 
-      if (!displayName || !photoURL) {
-        throw new Error('Missing information from Google Account.');
-      }
-
       setUser({
         id: uid,
         name: displayName,
@@ -38,6 +34,54 @@ function AuthProvider({ children }) {
     setLoadingUser(false);
   }
 
+  async function createUserWithEmailAndPassword(email, name, password, showError) {
+    try {
+      const result = await auth.createUserWithEmailAndPassword(email, password);
+      const user = auth.currentUser;
+
+      user.updateProfile({
+        displayName: name,
+        photoURL: `https://avatars.dicebear.com/api/initials/${name}.svg`
+      }).then(() => {
+        const user = auth.currentUser;
+        const { displayName, photoURL, uid, email } = user;
+
+        setUser({
+          id: uid,
+          name: displayName,
+          avatar: photoURL,
+          email: email,
+        });
+
+        Router.push('/');
+      });
+    } catch (error) {
+      showError(error.message);
+    }
+  }
+
+  async function signInWithEmailAndPassword(email, password, showError) {
+    try {
+      const result = await auth.signInWithEmailAndPassword(email, password);
+
+      if (result) {
+        const { displayName, photoURL, uid, email } = result.user;
+
+        setUser({
+          id: uid,
+          name: displayName,
+          avatar: photoURL,
+          email: email,
+        });
+
+        Router.push('/');
+      }
+
+    } catch (error) {
+      showError(error.message);
+    }
+  }
+
   async function signOut() {
     firebase.auth().signOut();
     Router.reload(window.location.pathname);
@@ -49,10 +93,6 @@ function AuthProvider({ children }) {
 
       if (user) {
         const { displayName, photoURL, uid, email } = user;
-
-        if (!displayName || !photoURL) {
-          throw new Error('Missing information from Google Account.');
-        }
 
         setUser({
           id: uid,
@@ -73,6 +113,8 @@ function AuthProvider({ children }) {
   return (
     <AuthContext.Provider value={{
       signInWithGoogle,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
       user,
       loadingUser,
       signOut,
