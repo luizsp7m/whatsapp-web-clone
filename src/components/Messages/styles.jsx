@@ -8,10 +8,9 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;  
 
-  gap: 1rem;
+  scroll-behavior: smooth;
 
-  /* align-items: flex-start;
-  justify-content: flex-end; */
+  gap: 1rem;
 
   &::-webkit-scrollbar {
     width: 6px;

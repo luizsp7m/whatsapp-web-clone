@@ -7,7 +7,7 @@ const dark = {
     textSecondary: "#e2e2d9",
     backgroundPrimary: "#0D1418",
     message: "#262D31",
-    buttonPrimary: "#16a085",
+    buttonPrimary: "#222f3e",
   }
 }
 
@@ -20,7 +20,7 @@ const light = {
     textSecondary: "#333",
     backgroundPrimary: "#E5DDD5",
     message: "#f0f0f5",
-    buttonPrimary: "#16a085",
+    buttonPrimary: "#576574",
   }
 }
 

@@ -23,8 +23,13 @@ export default function Messages({ group }) {
     setMessages(parsedMessages);
   }, [group]);
 
+  useEffect(() => {
+    const scrollBar = document.querySelector(".scrollBar");
+    scrollBar.scrollTop = scrollBar.scrollHeight;
+  }, [messages]);
+
   return (
-    <Container>
+    <Container className="scrollBar">
       {messages.map(message => <MessageItem
         key={message.id}
         message={message}
