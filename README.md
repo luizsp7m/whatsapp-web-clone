@@ -4,7 +4,7 @@
 
 Inicialmente a ideia desse projeto era apenas reproduzir a interface do WhatsApp Web, no entando, acabei integrando-o com o Firebase o que gerou outras funcionalidades para o projeto, como autenticação com e-mail e senha ou conta Google, criação de grupos e envios de mensagens. 
 
-![](./design/preview.gif) 
+![](./public/design/preview.gif) 
 
 ### Funcionalidades 
 - Realizar autenticação com uma conta Google 
@@ -18,6 +18,7 @@ Inicialmente a ideia desse projeto era apenas reproduzir a interface do WhatsApp
 - Enviar mensagens em grupos que você participa 
 - Apagar mensagens que você enviou 
 - Ver quais usuários participam de um grupo especifíco 
+- Layout responsivo
 
 ### Tecnologias 
 - Next.js 
