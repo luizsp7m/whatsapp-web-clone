@@ -2,7 +2,7 @@
 
 ##### [Site URL](https://whatsapp-web-clone-alpha.vercel.app/) 
 
-Inicialmente a ideia desse projeto era apenas reproduzir a interface do WhatsApp Web, no entando, acabei integrando-o com o Firebase o que gerou outras funcionalidades para o projeto, como autenticação com e-mail e senha ou conta Google, criação de grupos e envios de mensagens. 
+Inicialmente a ideia desse projeto era apenas reproduzir a interface do WhatsApp Web, no entanto acabei integrando-o com o Firebase o que gerou outras funcionalidades para o projeto, como autenticação com e-mail e senha ou conta Google, criação de grupos e envios de mensagens. 
 
 ![](./public/design/preview.gif) 
 
