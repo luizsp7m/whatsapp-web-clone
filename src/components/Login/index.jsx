@@ -45,10 +45,6 @@ export default function Login() {
 
   return (
     <Container>
-      <Image>
-        <img src="/assets/hero.jpg" alt="Hero" />
-      </Image>
-
       <Wrapper>
         {!showCreateAccount ? (
           <Form onSubmit={signInWithEmail}>

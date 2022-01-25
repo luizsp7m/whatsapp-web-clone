@@ -1,30 +1,10 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: grid;
-  grid-template-columns: 5fr 2fr;
   min-height: 100vh;
-  cursor: default;
-
-  @media (max-width: 1024px) {
-    grid-template-columns: 3fr 2fr;
-  }
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-`
-
-export const Image = styled.div`
-  > img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  @media (max-width: 768px) {
-    display: none;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 export const Wrapper = styled.div`
@@ -34,6 +14,11 @@ export const Wrapper = styled.div`
   align-items: center;
   gap: 2rem;
   background-color: #f0f0f5;
+  border-radius: 1rem;
+
+  max-width: 375px;
+  width: 90%;
+  margin: 0 auto;
 `
 
 export const Form = styled.form`
@@ -44,7 +29,7 @@ export const Form = styled.form`
   gap: 2rem;
 
   > h1 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: #222f3e;
   }
 
