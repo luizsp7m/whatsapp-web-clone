@@ -25,7 +25,7 @@ export const Container = styled.form`
     background-color: rgba(0, 0, 0, .1);
     border: 0;
     padding: 1.5rem 2rem;
-    border-radius: 2rem;
+    border-radius: 0.5rem;
     color: ${({ theme }) => theme.colors.textPrimary};
     outline: 0;
     font-size: 1.35rem;

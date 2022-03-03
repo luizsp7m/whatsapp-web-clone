@@ -6,7 +6,7 @@ export const Container = styled.div`
   height: calc(100vh - 146px);
 
   display: flex;
-  flex-direction: column;  
+  flex-direction: column-reverse;  
 
   scroll-behavior: smooth;
 

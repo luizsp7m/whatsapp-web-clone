@@ -43,7 +43,7 @@ export default function ChatFooter() {
       />
 
       <button type="submit">
-        <IconSend size={18} />
+        <IconSend size={22} />
       </button>
     </Container>
   );

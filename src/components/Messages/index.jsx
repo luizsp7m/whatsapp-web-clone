@@ -20,13 +20,15 @@ export default function Messages({ group }) {
       });
     }
 
-    setMessages(parsedMessages);
+    const reverseMessages = parsedMessages.reverse();
+
+    setMessages(reverseMessages);
   }, [group]);
 
-  useEffect(() => {
-    const scrollBar = document.querySelector(".scrollBar");
-    scrollBar.scrollTop = scrollBar.scrollHeight;
-  }, [messages]);
+  // useEffect(() => {
+  //   const scrollBar = document.querySelector(".scrollBar");
+  //   scrollBar.scrollTop = scrollBar.scrollHeight;
+  // }, [messages]);
 
   return (
     <Container className="scrollBar">
